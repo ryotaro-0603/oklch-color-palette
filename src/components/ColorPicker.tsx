@@ -73,6 +73,7 @@ export default function ColorPicker({ initialColor = '#ff0000', onColorChange }:
         color={color}
         onChange={handleColorChange}
         disableAlpha={true}
+        presetColors={[]}
         width="280px"
         styles={{
           default: {

@@ -6,7 +6,7 @@ import ColorPicker from "../components/ColorPicker.tsx";
 <Layout title="OKLCH Color Converter">
   <main>
     <div class="header">
-      <h1>🎨 OKLCH Color Converter</h1>
+      <h1>OKLCH Color Converter</h1>
       <p class="subtitle">先進的な色空間でのカラー変換ツール</p>
     </div>
 
@@ -16,11 +16,6 @@ import ColorPicker from "../components/ColorPicker.tsx";
           <h3>カラーピッカー</h3>
           <ColorPicker client:load initialColor="#ff0000" />
         </div>
-        
-      </div>
-
-      <div class="input-section">
-        <h3>カラーコード入力</h3>
         <div class="inputs-grid">
           <div class="input-card">
             <label for="hexInput">HEX</label>
@@ -34,29 +29,24 @@ import ColorPicker from "../components/ColorPicker.tsx";
         </div>
 
         <div class="palette-controls">
-          <div class="input-card">
+          <div class="slider-card">
             <label for="paletteCount">パレット数</label>
-            <select id="paletteCount">
-              <option value="5">5色</option>
-              <option value="6">6色</option>
-              <option value="7">7色</option>
-              <option value="8">8色</option>
-              <option value="9">9色</option>
-              <option value="10">10色</option>
-              <option value="11">11色</option>
-              <option value="12" selected>12色</option>
-              <option value="13">13色</option>
-            </select>
+            <div class="slider-container">
+              <span class="slider-label">5</span>
+              <input type="range" id="paletteCount" min="5" max="13" value="12" class="palette-slider" />
+              <span class="slider-label">13</span>
+            </div>
+            <div class="slider-value">
+              <span id="paletteCountValue">12</span>色
+            </div>
           </div>
         </div>
-
       </div>
-    </div>
 
-
-    <div id="paletteSection" class="palette-section" style="display: none;">
-      <h3 class="palette-title">✨ 明度バリエーション</h3>
-      <div id="palette" class="palette-grid"></div>
+      <div id="paletteSection" class="palette-section" style="display: none;">
+        <h3 class="palette-title">明度バリエーション</h3>
+        <div id="palette" class="palette-grid"></div>
+      </div>
     </div>
   </main>
 </Layout>
@@ -67,8 +57,8 @@ import ColorPicker from "../components/ColorPicker.tsx";
 </script>
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-  
+  @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
   * {
     margin: 0;
     padding: 0;
@@ -76,14 +66,17 @@ import ColorPicker from "../components/ColorPicker.tsx";
   }
 
   main {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family:
+      "Inter",
+      -apple-system,
+      BlinkMacSystemFont,
+      sans-serif;
     min-height: 100vh;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     padding: 2rem;
   }
 
   .header {
-    text-align: center;
     margin-bottom: 3rem;
     color: white;
   }
@@ -92,7 +85,7 @@ import ColorPicker from "../components/ColorPicker.tsx";
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 
   .subtitle {
@@ -102,7 +95,6 @@ import ColorPicker from "../components/ColorPicker.tsx";
   }
 
   .main-container {
-    max-width: 1200px;
     margin: 0 auto;
     display: grid;
     gap: 2rem;
@@ -137,7 +129,6 @@ import ColorPicker from "../components/ColorPicker.tsx";
     margin-bottom: 1.5rem;
     text-align: center;
   }
-
 
   .inputs-grid {
     display: grid;
@@ -177,13 +168,13 @@ import ColorPicker from "../components/ColorPicker.tsx";
     background: white;
     border-radius: 12px;
     color: #1e293b;
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
     transition: all 0.3s ease;
     cursor: pointer;
   }
 
   .input-card input {
-    font-family: 'Inter', monospace;
+    font-family: "Inter", monospace;
   }
 
   .input-card input:focus,
@@ -196,11 +187,100 @@ import ColorPicker from "../components/ColorPicker.tsx";
     margin-bottom: 1rem;
   }
 
-  .palette-section {
-    margin-top: 3rem;
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
+  .slider-card {
+    background: #f8fafc;
+    border-radius: 16px;
+    padding: 1.5rem;
+    border: 2px solid #e2e8f0;
+    transition: all 0.3s ease;
+  }
+
+  .slider-card:focus-within {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  }
+
+  .slider-card label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #475569;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: center;
+  }
+
+  .slider-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .slider-label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #64748b;
+    min-width: 20px;
+    text-align: center;
+  }
+
+  .palette-slider {
+    flex: 1;
+    height: 8px;
+    border-radius: 8px;
+    background: linear-gradient(to right, #e2e8f0 0%, #667eea 50%, #764ba2 100%);
+    outline: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .palette-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 24px;
+    width: 24px;
+    border-radius: 50%;
+    background: #667eea;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    border: 2px solid white;
+    transition: all 0.3s ease;
+  }
+
+  .palette-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+  }
+
+  .palette-slider::-moz-range-thumb {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: #764ba2;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    border: 2px solid white;
+    transition: all 0.3s ease;
+  }
+
+  .palette-slider::-moz-range-thumb:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+  }
+
+  .slider-value {
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1e293b;
+    background: white;
+    padding: 0.5rem 1rem;
+    border-radius: 12px;
+    border: 2px solid #e2e8f0;
   }
 
   .palette-title {
@@ -212,24 +292,10 @@ import ColorPicker from "../components/ColorPicker.tsx";
   }
 
   .palette-grid {
+    width: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
     gap: 1rem;
-  }
-  
-  @media (min-width: 768px) {
-    .palette-grid {
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 1.2rem;
-    }
-  }
-  
-  @media (min-width: 1200px) {
-    .palette-grid {
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 1rem;
-      max-width: 100%;
-    }
   }
 
   .swatch {
@@ -247,7 +313,7 @@ import ColorPicker from "../components/ColorPicker.tsx";
   }
 
   .swatch::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -262,7 +328,7 @@ import ColorPicker from "../components/ColorPicker.tsx";
   }
 
   .swatch > div:first-child {
-    font-family: 'Inter', monospace;
+    font-family: "Inter", monospace;
     font-weight: 600;
     font-size: 0.75rem;
     color: #1e293b;
@@ -283,11 +349,11 @@ import ColorPicker from "../components/ColorPicker.tsx";
     .header h1 {
       font-size: 2rem;
     }
-    
+
     .main-container {
       gap: 1.5rem;
     }
-    
+
     .color-picker-wrapper,
     .preview-wrapper,
     .input-section {
