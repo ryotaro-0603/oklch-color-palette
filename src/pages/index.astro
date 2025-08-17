@@ -28,17 +28,15 @@ import ColorPicker from "../components/ColorPicker.tsx";
           </div>
         </div>
 
-        <div class="palette-controls">
-          <div class="slider-card">
-            <label for="paletteCount">パレット数</label>
-            <div class="slider-container">
-              <span class="slider-label">5</span>
-              <input type="range" id="paletteCount" min="5" max="13" value="12" class="palette-slider" />
-              <span class="slider-label">13</span>
-            </div>
-            <div class="slider-value">
-              <span id="paletteCountValue">12</span>色
-            </div>
+        <div class="slider-card">
+          <label for="paletteCount">パレット数</label>
+          <div class="slider-container">
+            <span class="slider-label">5</span>
+            <input type="range" id="paletteCount" min="5" max="13" value="12" class="palette-slider" />
+            <span class="slider-label">13</span>
+          </div>
+          <div class="slider-value">
+            <span id="paletteCountValue">12</span>色
           </div>
         </div>
       </div>
@@ -71,8 +69,8 @@ import ColorPicker from "../components/ColorPicker.tsx";
       -apple-system,
       BlinkMacSystemFont,
       sans-serif;
-    min-height: 100vh;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100svh;
+    background: #f0f0f0;
     padding: 2rem;
   }
 
@@ -181,10 +179,6 @@ import ColorPicker from "../components/ColorPicker.tsx";
   .input-card select:focus {
     outline: none;
     box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-  }
-
-  .palette-controls {
-    margin-bottom: 1rem;
   }
 
   .slider-card {

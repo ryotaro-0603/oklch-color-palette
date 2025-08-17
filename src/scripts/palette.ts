@@ -140,7 +140,51 @@ function generateColorPalette(baseColor: Color, paletteEl: HTMLElement): void {
 
   // パレットを描画
   paletteEl.innerHTML = "";
+  // paletteData.forEach((item) => {
+  //   const div = document.createElement("div");
+  //   div.className = "swatch";
+  //   div.style.background = item.hex;
+
+  //   const lightnessPercent = Math.round(item.lightness * 100);
+
+  //   // 色見本の背景色を設定
+  //   div.style.setProperty("--swatch-color", item.hex);
+
+  //   div.innerHTML = `
+  //     <div>${item.hex}</div>
+  //     <div>
+  //       L${lightnessPercent}%${item.isOriginal ? " 🎯" : ""}
+  //     </div>
+  //   `;
+
+  //   // 元の色の場合は枠線で強調
+  //   if (item.isOriginal) {
+  //     div.style.border = "3px solid #667eea";
+  //     div.style.boxShadow = "0 8px 24px rgba(102, 126, 234, 0.4)";
+  //   }
+
+  //   // クリックでクリップボードにコピー
+  //   div.addEventListener("click", () => {
+  //     navigator.clipboard
+  //       .writeText(item.hex)
+  //       .then(() => {
+  //         const originalText = div.innerHTML;
+  //         div.innerHTML = `<div>📋 コピー済み!</div><div>L${lightnessPercent}%</div>`;
+  //         setTimeout(() => {
+  //           div.innerHTML = originalText;
+  //         }, 1000);
+  //       })
+  //       .catch(() => {
+  //         console.error("クリップボードへのコピーに失敗しました");
+  //       });
+  //   });
+
+  //   paletteEl.appendChild(div);
+  // });
   paletteData.forEach((item) => {
+    const wrapper = document.createElement("div");
+    wrapper.className = "swatch-wrapper";
+
     const div = document.createElement("div");
     div.className = "swatch";
     div.style.background = item.hex;
@@ -150,28 +194,29 @@ function generateColorPalette(baseColor: Color, paletteEl: HTMLElement): void {
     // 色見本の背景色を設定
     div.style.setProperty("--swatch-color", item.hex);
 
-    div.innerHTML = `
-      <div>${item.hex}</div>
-      <div>
-        L${lightnessPercent}%${item.isOriginal ? " 🎯" : ""}
-      </div>
-    `;
-
     // 元の色の場合は枠線で強調
     if (item.isOriginal) {
       div.style.border = "3px solid #667eea";
       div.style.boxShadow = "0 8px 24px rgba(102, 126, 234, 0.4)";
     }
 
-    // クリックでクリップボードにコピー
+    // ラベル（外側のテキスト）
+    const label = document.createElement("div");
+    label.className = "swatch-label";
+    label.innerHTML = `
+    <div>${item.hex}</div>
+    <div>L${lightnessPercent}%${item.isOriginal ? " 🎯" : ""}</div>
+  `;
+
+    // クリックでコピー（divだけ対象にする）
     div.addEventListener("click", () => {
       navigator.clipboard
         .writeText(item.hex)
         .then(() => {
-          const originalText = div.innerHTML;
-          div.innerHTML = `<div>📋 コピー済み!</div><div>L${lightnessPercent}%</div>`;
+          const originalText = label.innerHTML;
+          label.innerHTML = `<div>📋 コピー済み!</div><div>L${lightnessPercent}%</div>`;
           setTimeout(() => {
-            div.innerHTML = originalText;
+            label.innerHTML = originalText;
           }, 1000);
         })
         .catch(() => {
@@ -179,7 +224,9 @@ function generateColorPalette(baseColor: Color, paletteEl: HTMLElement): void {
         });
     });
 
-    paletteEl.appendChild(div);
+    wrapper.appendChild(div);
+    wrapper.appendChild(label);
+    paletteEl.appendChild(wrapper);
   });
 }
 
