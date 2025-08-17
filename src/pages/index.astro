@@ -1,11 +1,297 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Layout from "../layouts/Layout.astro";
+import ColorPicker from "../components/ColorPicker.tsx";
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="OKLCH Color Converter">
+  <main>
+    <div class="header">
+      <h1>🎨 OKLCH Color Converter</h1>
+      <p class="subtitle">先進的な色空間でのカラー変換ツール</p>
+    </div>
+
+    <div class="main-container">
+      <div class="color-section">
+        <div class="color-picker-wrapper">
+          <h3>カラーピッカー</h3>
+          <ColorPicker client:load initialColor="#ff0000" />
+        </div>
+        
+      </div>
+
+      <div class="input-section">
+        <h3>カラーコード入力</h3>
+        <div class="inputs-grid">
+          <div class="input-card">
+            <label for="hexInput">HEX</label>
+            <input id="hexInput" type="text" value="#ff0000" placeholder="#ff0000" />
+          </div>
+
+          <div class="input-card">
+            <label for="rgbInput">RGB</label>
+            <input id="rgbInput" type="text" placeholder="rgb(255, 0, 0)" />
+          </div>
+        </div>
+
+        <div class="palette-controls">
+          <div class="input-card">
+            <label for="paletteCount">パレット数</label>
+            <select id="paletteCount">
+              <option value="5">5色</option>
+              <option value="6">6色</option>
+              <option value="7">7色</option>
+              <option value="8">8色</option>
+              <option value="9">9色</option>
+              <option value="10">10色</option>
+              <option value="11">11色</option>
+              <option value="12" selected>12色</option>
+              <option value="13">13色</option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <div id="paletteSection" class="palette-section" style="display: none;">
+      <h3 class="palette-title">✨ 明度バリエーション</h3>
+      <div id="palette" class="palette-grid"></div>
+    </div>
+  </main>
 </Layout>
+
+<script>
+  import { initPalette } from "../scripts/palette.ts";
+  window.addEventListener("DOMContentLoaded", initPalette);
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  main {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 2rem;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 3rem;
+    color: white;
+  }
+
+  .header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    font-weight: 400;
+  }
+
+  .main-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 768px) {
+    .main-container {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .color-section {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .color-picker-wrapper,
+  .input-section {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    padding: 2rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1a1a2e;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+
+  .inputs-grid {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .input-card {
+    background: #f8fafc;
+    border-radius: 16px;
+    padding: 1.5rem;
+    border: 2px solid #e2e8f0;
+    transition: all 0.3s ease;
+  }
+
+  .input-card:focus-within {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  }
+
+  .input-card label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #475569;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .input-card input,
+  .input-card select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border: none;
+    background: white;
+    border-radius: 12px;
+    color: #1e293b;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .input-card input {
+    font-family: 'Inter', monospace;
+  }
+
+  .input-card input:focus,
+  .input-card select:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  }
+
+  .palette-controls {
+    margin-bottom: 1rem;
+  }
+
+  .palette-section {
+    margin-top: 3rem;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .palette-title {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 2rem;
+  }
+
+  .palette-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+  }
+  
+  @media (min-width: 768px) {
+    .palette-grid {
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1.2rem;
+    }
+  }
+  
+  @media (min-width: 1200px) {
+    .palette-grid {
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 1rem;
+      max-width: 100%;
+    }
+  }
+
+  .swatch {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 16px;
+    padding: 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+    min-height: 100px;
+  }
+
+  .swatch::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60%;
+    border-radius: 16px 16px 0 0;
+  }
+
+  .swatch:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+  }
+
+  .swatch > div:first-child {
+    font-family: 'Inter', monospace;
+    font-weight: 600;
+    font-size: 0.75rem;
+    color: #1e293b;
+    margin-bottom: 0.3rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .swatch > div:last-child {
+    font-size: 0.7rem;
+    color: #64748b;
+    font-weight: 500;
+    position: relative;
+    z-index: 2;
+  }
+
+  @media (max-width: 768px) {
+    .header h1 {
+      font-size: 2rem;
+    }
+    
+    .main-container {
+      gap: 1.5rem;
+    }
+    
+    .color-picker-wrapper,
+    .preview-wrapper,
+    .input-section {
+      padding: 1.5rem;
+    }
+  }
+</style>
