@@ -7,11 +7,7 @@
 }
 
 main {
-  font-family:
-    "Inter",
-    -apple-system,
-    BlinkMacSystemFont,
-    sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
   min-height: 100svh;
   background: #f0f0f0;
   padding: 2rem;
@@ -26,7 +22,6 @@ main {
   font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .subtitle {
@@ -39,27 +34,21 @@ main {
   margin: 0 auto;
   display: grid;
   gap: 2rem;
-  grid-template-columns: 1fr;
-}
-
-@media (min-width: 768px) {
-  .main-container {
-    grid-template-columns: 1fr 1fr;
-  }
+  grid-template-columns: auto 1fr;
 }
 
 .color-section {
   display: grid;
   gap: 1.5rem;
+  align-content: flex-start;
 }
 
 .color-picker-wrapper,
 .input-section {
-  background: rgba(255, 255, 255, 0.95);
+  background: #f8fafc;
   backdrop-filter: blur(20px);
   border-radius: 24px;
   padding: 2rem;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
@@ -75,66 +64,6 @@ h3 {
   display: grid;
   gap: 1rem;
   margin-bottom: 2rem;
-}
-
-.input-card {
-  background: #f8fafc;
-  border-radius: 16px;
-  padding: 1.5rem;
-  border: 2px solid #e2e8f0;
-  transition: all 0.3s ease;
-}
-
-.input-card:focus-within {
-  border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-}
-
-.input-card label {
-  display: block;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: #475569;
-  margin-bottom: 0.5rem;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.input-card input,
-.input-card select {
-  width: 100%;
-  padding: 0.75rem 1rem;
-  font-size: 1rem;
-  border: none;
-  background: white;
-  border-radius: 12px;
-  color: #1e293b;
-  font-family: "Inter", sans-serif;
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-.input-card input {
-  font-family: "Inter", monospace;
-}
-
-.input-card input:focus,
-.input-card select:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-}
-
-.slider-card {
-  background: #f8fafc;
-  border-radius: 16px;
-  padding: 1.5rem;
-  border: 2px solid #e2e8f0;
-  transition: all 0.3s ease;
-}
-
-.slider-card:focus-within {
-  border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
 .slider-card label {
@@ -221,6 +150,7 @@ h3 {
 }
 
 .palette-section {
+  width: 100%;
   margin-top: 3rem;
   max-width: 1200px;
   margin-left: auto;
@@ -238,7 +168,7 @@ h3 {
 .palette-grid {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
   gap: 1rem;
 }
 
@@ -250,8 +180,8 @@ h3 {
 }
 
 .swatch {
-  width: 100px;
-  height: 100px;
+  width: 60px;
+  height: 60px;
   border-radius: 16px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -266,16 +196,9 @@ h3 {
 
 .swatch-label {
   text-align: center;
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(10px);
-  border-radius: 12px;
-  padding: 0.75rem;
-  min-height: 60px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  transition: all 0.3s ease;
 }
 
 .swatch-label > div:first-child {

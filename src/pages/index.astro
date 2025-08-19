@@ -16,21 +16,9 @@ import "../styles/global.css";
         <div class="color-picker-wrapper">
           <h3>カラーピッカー</h3>
           <ColorPicker client:load initialColor="#ff0000" />
-        </div>
-        <div class="inputs-grid">
-          <div class="input-card">
-            <label for="hexInput">HEX</label>
-            <input id="hexInput" type="text" value="#ff0000" placeholder="#ff0000" />
-          </div>
 
-          <div class="input-card">
-            <label for="rgbInput">RGB</label>
-            <input id="rgbInput" type="text" placeholder="rgb(255, 0, 0)" />
-          </div>
-        </div>
-
-        <div class="slider-card">
           <label for="paletteCount">パレット数</label>
+          
           <div class="slider-container">
             <span class="slider-label">5</span>
             <input type="range" id="paletteCount" min="5" max="13" value="12" class="palette-slider" />
@@ -43,7 +31,6 @@ import "../styles/global.css";
       </div>
 
       <div id="paletteSection" class="palette-section" style="display: none;">
-        <h3 class="palette-title">明度バリエーション</h3>
         <div id="palette" class="palette-grid"></div>
       </div>
     </div>
