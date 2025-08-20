@@ -9,23 +9,22 @@
 main {
   font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
   min-height: 100svh;
-  background: #f0f0f0;
+  background: #f8fafc;
   padding: 2rem;
 }
 
 .header {
   margin-bottom: 3rem;
-  color: white;
 }
 
 .header h1 {
-  font-size: 2.5rem;
+  font-size: 1.5rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
 }
 
 .subtitle {
-  font-size: 1.1rem;
+  font-size: 1rem;
   opacity: 0.9;
   font-weight: 400;
 }
@@ -34,7 +33,7 @@ main {
   margin: 0 auto;
   display: grid;
   gap: 2rem;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: 400px 1fr;
 }
 
 .color-section {
@@ -45,7 +44,7 @@ main {
 
 .color-picker-wrapper,
 .input-section {
-  background: #f8fafc;
+  background: #fff;
   backdrop-filter: blur(20px);
   border-radius: 24px;
   padding: 2rem;
@@ -58,6 +57,31 @@ h3 {
   color: #1a1a2e;
   margin-bottom: 1.5rem;
   text-align: center;
+}
+
+h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1a1a2e;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.graph-container {
+  margin-top: 2rem;
+}
+
+.graph-wrapper {
+  background: white;
+  border-radius: 12px;
+  padding: 1rem;
+  border: 2px solid #e2e8f0;
+  display: flex;
+  justify-content: center;
+}
+
+#curveGraph {
+  border-radius: 8px;
 }
 
 .inputs-grid {

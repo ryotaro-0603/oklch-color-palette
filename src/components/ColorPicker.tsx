@@ -43,11 +43,7 @@ export default function ColorPicker({ initialColor = "#ff0000", onColorChange }:
 
   return (
     <div style={{ display: "flex", justifyContent: "center", marginBottom: "1rem" }}>
-      <ReactColorPalette
-        color={color}
-        onChange={handleColorChange}
-        hideInput={["rgb", "hsv"]}
-      />
+      <ReactColorPalette color={color} onChange={handleColorChange} hideInput={["rgb", "hsv"]} />
     </div>
   );
 }
