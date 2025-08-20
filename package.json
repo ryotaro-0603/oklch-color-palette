@@ -14,6 +14,7 @@
     "@types/react-color": "^3.0.13",
     "@types/react-dom": "^19.1.7",
     "astro": "^5.13.2",
+    "chart.js": "^4.5.0",
     "colorjs.io": "^0.5.2",
     "react-color": "^2.19.3",
     "react-color-palette": "^7.3.1"
