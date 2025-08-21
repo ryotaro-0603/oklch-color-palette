@@ -13,12 +13,14 @@ import "../styles/global.css";
 
     <div class="main-container">
       <div class="color-section">
-        <div class="color-picker-wrapper">
-          <h3>カラーピッカー</h3>
+        <div class="custom-wrapper">
+          <h3>Color Picker</h3>
           <ColorPicker client:load initialColor="#f64466" />
-
+        </div>
+        <div class="custom-wrapper">
+          <h3>Customize</h3>
           <label for="paletteCount">パレット数</label>
-          
+
           <div class="slider-container">
             <span class="slider-label">5</span>
             <input type="range" id="paletteCount" min="5" max="13" value="12" class="palette-slider" />
@@ -29,7 +31,7 @@ import "../styles/global.css";
           </div>
 
           <label for="sigmoidSteepness">シグモイドカーブ</label>
-          
+
           <div class="slider-container">
             <span class="slider-label">0.0</span>
             <input type="range" id="sigmoidSteepness" min="0" max="1" step="0.1" value="0.5" class="palette-slider" />
@@ -39,9 +41,8 @@ import "../styles/global.css";
             <span id="sigmoidSteepnessValue">0.5</span>
           </div>
 
-
           <label for="chromaHeight">彩度カーブ高さ</label>
-          
+
           <div class="slider-container">
             <span class="slider-label">0.0</span>
             <input type="range" id="chromaHeight" min="0" max="1" step="0.1" value="1" class="palette-slider" />
@@ -50,19 +51,15 @@ import "../styles/global.css";
           <div class="slider-value">
             <span id="chromaHeightValue">1.0</span>
           </div>
-
-          <div class="export-container">
-            <h4>エクスポート</h4>
-            <div class="export-controls">
-              <label for="exportFormat">形式</label>
-              <select id="exportFormat" class="export-select">
-                <option value="css">CSS変数</option>
-                <option value="json">JSON</option>
-              </select>
-              <button id="exportButton" class="export-button">
-                📄 エクスポート
-              </button>
-            </div>
+        </div>
+        <div class="custom-wrapper">
+          <h3>Export</h3>
+          <div class="export-controls">
+            <select id="exportFormat" class="export-select">
+              <option value="css">CSS変数</option>
+              <option value="json">JSON</option>
+            </select>
+            <button id="exportButton" class="export-button"> 📄 エクスポート </button>
           </div>
         </div>
       </div>
@@ -79,10 +76,9 @@ import "../styles/global.css";
       </div>
     </div>
   </main>
+
+  <script>
+    import { initPalette } from "../scripts/palette.ts";
+    window.addEventListener("DOMContentLoaded", initPalette);
+  </script>
 </Layout>
-
-<script>
-  import { initPalette } from "../scripts/palette.ts";
-  window.addEventListener("DOMContentLoaded", initPalette);
-</script>
-
