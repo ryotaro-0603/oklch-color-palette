@@ -5,7 +5,8 @@ import { handleExport } from "./exportManager";
 
 export function setupEventHandlers(
   updateColorFromValue: (colorValue: string) => void,
-  isValidHex: (hex: string) => boolean
+  isValidHex: (hex: string) => boolean,
+  getCurrentSelectedColor: () => string
 ): void {
   const hexInput = document.getElementById("hexInput") as HTMLInputElement | null;
   const rgbInput = document.getElementById("rgbInput") as HTMLInputElement | null;
@@ -18,12 +19,12 @@ export function setupEventHandlers(
 
     if (!hexValue) return;
 
-    // HEX入力フィールドを更新
+    // HEX入力フィールドを更新（存在する場合のみ）
     if (hexInput) {
       hexInput.value = hexValue;
     }
 
-    // RGB値に変換して入力フィールドを更新
+    // RGB値に変換して入力フィールドを更新（存在する場合のみ）
     if (rgbInput) {
       try {
         const color = new Color(hexValue);
@@ -104,7 +105,7 @@ export function setupEventHandlers(
       // パレットが表示されている場合は再生成
       const paletteSection = document.getElementById("paletteSection") as HTMLElement | null;
       if (paletteSection && paletteSection.style.display !== "none") {
-        const currentHex = hexInput?.value || "#f64466";
+        const currentHex = getCurrentSelectedColor();
         updateColorFromValue(currentHex);
       }
 
@@ -134,7 +135,7 @@ export function setupEventHandlers(
       // パレットが表示されている場合は再生成
       const paletteSection = document.getElementById("paletteSection") as HTMLElement | null;
       if (paletteSection && paletteSection.style.display !== "none") {
-        const currentHex = hexInput?.value || "#f64466";
+        const currentHex = getCurrentSelectedColor();
         updateColorFromValue(currentHex);
       }
 
@@ -164,7 +165,7 @@ export function setupEventHandlers(
       // パレットが表示されている場合は再生成
       const paletteSection = document.getElementById("paletteSection") as HTMLElement | null;
       if (paletteSection && paletteSection.style.display !== "none") {
-        const currentHex = hexInput?.value || "#f64466";
+        const currentHex = getCurrentSelectedColor();
         updateColorFromValue(currentHex);
       }
 

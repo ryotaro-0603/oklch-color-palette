@@ -4,6 +4,14 @@ import { generateLightnessValues, mountainCurve } from "../utils/mathFunctions";
 import { drawCurveGraph } from "../utils/chartManager";
 import { setupEventHandlers } from "../utils/eventHandlers";
 
+// 現在選択されている色を保持するグローバル変数
+let currentSelectedColor = "#f64466";
+
+// 現在の色を取得する関数
+export function getCurrentSelectedColor(): string {
+  return currentSelectedColor;
+}
+
 function updateColorFromValue(colorValue: string): void {
   const paletteSection = document.getElementById("paletteSection") as HTMLElement | null;
   const paletteEl = document.getElementById("palette") as HTMLElement | null;
@@ -21,6 +29,9 @@ function updateColorFromValue(colorValue: string): void {
   try {
     const base = new Color(colorValue);
     const hex = base.to("srgb").toString({ format: "hex" });
+
+    // 現在の色を保存
+    currentSelectedColor = hex;
 
     // faviconを更新
     updateFavicon(hex);
@@ -172,7 +183,7 @@ export function initPalette(): void {
   drawCurveGraph();
 
   // イベントハンドラーをセットアップ
-  setupEventHandlers(updateColorFromValue, isValidHex);
+  setupEventHandlers(updateColorFromValue, isValidHex, getCurrentSelectedColor);
 }
 
 function isValidHex(hex: string): boolean {
